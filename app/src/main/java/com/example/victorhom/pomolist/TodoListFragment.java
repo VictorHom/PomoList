@@ -19,6 +19,7 @@ public class TodoListFragment extends ListFragment {
     private ArrayAdapter<String> adapter;
     private String[] todos;
     private LayoutInflater inflater;
+    Context myContext;
 
     static interface TodoListListener {
         void itemClicked(long id);
@@ -45,23 +46,32 @@ public class TodoListFragment extends ListFragment {
         );
         setListAdapter(adapter); // bind the array adapter to the list view
 
+
         // Inflate the layout for this fragment
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    public ArrayAdapter<String> getAdapter() {
+        return adapter;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        myContext = context;
         this.listener = (TodoListListener) context;
+
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        if (listener != null) {
-            listener.itemClicked(id);
-        }
+        // this handles clicks
+        // need to update long click for deletes
+        // other wise, we want access to quick actions
+        Todo.myList.remove(position);
+        this.onResume();
     }
-    
+
 
     @Override
     public void onResume() {
