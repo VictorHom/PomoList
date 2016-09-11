@@ -11,12 +11,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class TodoListFragment extends ListFragment {
-
+    ArrayAdapter<String> adapter;
+    String[] todos;
 
     static interface TodoListListener {
         void itemClicked(long id);
@@ -32,12 +35,13 @@ public class TodoListFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        String[] todos = new String[Todo.myList.length];
+        todos = new String[Todo.myList.size()];
         for (int i = 0; i < todos.length; i++) {
-            todos[i] = Todo.myList[i].getTodo();
+            todos[i] = Todo.myList.get(i).getTodo();
         }
+
 //
-        ArrayAdapter<String> adapter = new ArrayAdapter<String> (
+        adapter = new ArrayAdapter<String> (
                 inflater.getContext(), android.R.layout.simple_list_item_1, todos
         );
         setListAdapter(adapter); // bind the array adapter to the list view
@@ -57,6 +61,19 @@ public class TodoListFragment extends ListFragment {
         if (listener != null) {
             listener.itemClicked(id);
         }
+    }
+
+    public ArrayAdapter<String> getAdapter() {
+        return adapter;
+    }
+
+    public String[] getTodos() {
+        return todos;
+    }
+
+    public String[] setData(List<String> input) {
+        String[] arr = input.toArray(new String[input.size()]);
+        return arr;
     }
 
 }

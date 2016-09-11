@@ -1,6 +1,9 @@
 package com.example.victorhom.pomolist;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by victorhom on 9/10/16.
@@ -14,13 +17,16 @@ public class Todo {
 
     // for testing
     // goal - add to SQL and have a persistent backend
-    public static final Todo[] myList = {
+    public static List<Todo> myList = new ArrayList<>(Arrays.asList(
             new Todo("Buy Grocery", "Tomato, Notepad"),
             new Todo("Take Shower", "It\'s been a few days"),
             new Todo("Work on Todo List", "Submit project by 9/23")
-    };
+            )
+    );
 
-    private Todo(String todo, String note) {
+
+
+    Todo(String todo, String note) {
         this.todo = todo;
         this.note = note;
     }
