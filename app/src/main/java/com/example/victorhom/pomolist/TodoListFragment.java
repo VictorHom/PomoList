@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.util.List;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,20 +61,7 @@ public class TodoListFragment extends ListFragment {
             listener.itemClicked(id);
         }
     }
-
-    public ArrayAdapter<String> getAdapter() {
-        return adapter;
-    }
-
-    public String[] getTodos() {
-        return todos;
-    }
-
-    public String[] setData(List<String> input) {
-        String[] arr = input.toArray(new String[input.size()]);
-        return arr;
-    }
-
+    
 
     @Override
     public void onResume() {
