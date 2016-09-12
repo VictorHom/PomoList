@@ -1,6 +1,6 @@
 #Pomo List
 
-This is a todo app with a ketch(up). You can add your todo tasks to a pomodoro list and start a timer. This was you can time your todos and keep you on schedule.
+This is a todo app with a ketch(up). You can add your todo tasks to a pomodoro list and start a timer. This way you can time your todos and keep yourself on schedule.
 
 Screenshots to come later
 
