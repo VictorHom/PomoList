@@ -21,10 +21,13 @@ public class EditTodoFragment extends DialogFragment {
     public EditTodoFragment() {
         // Required empty public constructor
     }
-    public static EditTodoFragment newInstance(String title) {
+    public static EditTodoFragment newInstance(String title, String todo, String random, int position) {
         EditTodoFragment frag = new EditTodoFragment();
         Bundle args = new Bundle();
         args.putString("title", title);
+        args.putString("todo", todo);
+        args.putString("random", random);
+        args.putString("position", String.valueOf(position));
         frag.setArguments(args);
         return frag;
     }
@@ -42,10 +45,16 @@ public class EditTodoFragment extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Get field from view
-        mEditText = (EditText) view.findViewById(R.id.txt_your_name);
+        mEditText = (EditText) view.findViewById(R.id.edit_todo);
         // Fetch arguments from bundle and set title
-        String title = getArguments().getString("title", "Enter Name");
+        String title = this.getArguments().getString("title", "Pomodoro this");
+        String todo = this.getArguments().getString("todo","Edit");
+        String random = getArguments().getString("random", "also random");
+        String position = getArguments().getString("position");
+
+
         getDialog().setTitle(title);
+        mEditText.setText(todo+random+position);
         // Show soft keyboard automatically and request focus to field
         mEditText.requestFocus();
         getDialog().getWindow().setSoftInputMode(

@@ -58,21 +58,20 @@ public class TodoListFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        showEditDialog();
+        showEditDialog(l, v, position, id);
     }
 
     // this is the modal to edit the todo
-    private void showEditDialog() {
+    private void showEditDialog(ListView l, View v, int position, long id) {
+        String todo = l.getAdapter().getItem(position).toString();
         FragmentManager fm = getFragmentManager();
-        EditTodoFragment editNameDialogFragment = EditTodoFragment.newInstance("Some Title");
-        editNameDialogFragment.show(fm, "fragment_edit_name");
+        EditTodoFragment editTodoDialogFragment = EditTodoFragment.newInstance("Victor", todo, "random string", position);
+        editTodoDialogFragment.show(fm, "fragment_edit_todo");
     }
 
     @Override
     public void onResume() {
-        // right now for testing - I am using myList to add on todos
         updateTodos();
-
         adapter = new ArrayAdapter<String> (inflater.getContext(), android.R.layout.simple_list_item_1, todos);
         adapter.notifyDataSetChanged();
         setListAdapter(adapter); // bind the array adapter to the list view
