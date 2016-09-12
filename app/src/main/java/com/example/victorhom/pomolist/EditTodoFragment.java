@@ -17,16 +17,15 @@ import android.widget.EditText;
  */
 public class EditTodoFragment extends DialogFragment {
     private EditText mEditText;
+    private int positionInList;
 
     public EditTodoFragment() {
         // Required empty public constructor
     }
-    public static EditTodoFragment newInstance(String title, String todo, String random, int position) {
+    public static EditTodoFragment newInstance(String todo, int position) {
         EditTodoFragment frag = new EditTodoFragment();
         Bundle args = new Bundle();
-        args.putString("title", title);
         args.putString("todo", todo);
-        args.putString("random", random);
         args.putString("position", String.valueOf(position));
         frag.setArguments(args);
         return frag;
@@ -47,18 +46,22 @@ public class EditTodoFragment extends DialogFragment {
         // Get field from view
         mEditText = (EditText) view.findViewById(R.id.edit_todo);
         // Fetch arguments from bundle and set title
-        String title = this.getArguments().getString("title", "Pomodoro this");
         String todo = this.getArguments().getString("todo","Edit");
-        String random = getArguments().getString("random", "also random");
         String position = getArguments().getString("position");
 
 
-        getDialog().setTitle(title);
-        mEditText.setText(todo+random+position);
+        getDialog().setTitle("Pomodoro this");
+        mEditText.setText(todo);
         // Show soft keyboard automatically and request focus to field
         mEditText.requestFocus();
         getDialog().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+        // need to set update when someone hits save and there is text
+        // should be doable given that I have the view and the index
+        // also be able to set up todos with more information
+        // like when you added, edited, if in the pomo list
+
     }
 
 

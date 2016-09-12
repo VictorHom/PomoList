@@ -65,7 +65,7 @@ public class TodoListFragment extends ListFragment {
     private void showEditDialog(ListView l, View v, int position, long id) {
         String todo = l.getAdapter().getItem(position).toString();
         FragmentManager fm = getFragmentManager();
-        EditTodoFragment editTodoDialogFragment = EditTodoFragment.newInstance("Victor", todo, "random string", position);
+        EditTodoFragment editTodoDialogFragment = EditTodoFragment.newInstance(todo, position);
         editTodoDialogFragment.show(fm, "fragment_edit_todo");
     }
 
