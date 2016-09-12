@@ -28,7 +28,9 @@ public class MainActivity extends AppCompatActivity implements TodoListFragment.
     public void onClickAddTodo(View view){
         EditText todoInputForm = (EditText) findViewById(R.id.editText);
         String todo = todoInputForm.getText().toString();
-        Todo.myList.add(0, new Todo(todo, "test"));
+        if (todo.length() > 0) {
+            Todo.myList.add(0, new Todo(todo, "test"));
+        }
         todoInputForm.setText("");
         TodoListFragment todolist = (TodoListFragment) getFragmentManager().findFragmentById(R.id.todolist);
         todolist.onResume();
