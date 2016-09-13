@@ -101,6 +101,4 @@ public class TodoListFragment extends ListFragment {
         }
     }
 
-
-
 }

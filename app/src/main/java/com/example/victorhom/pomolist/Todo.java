@@ -35,6 +35,11 @@ public class Todo {
         return todo;
     }
 
+    public String setTodo(String updatedTodo) {
+        this.todo = updatedTodo;
+        return this.todo;
+    }
+
     public String getDescription() {
         return note;
     }
