@@ -34,7 +34,5 @@ public class MainActivity extends AppCompatActivity implements TodoListFragment.
         todoInputForm.setText("");
         TodoListFragment todolist = (TodoListFragment) getFragmentManager().findFragmentById(R.id.todolist);
         todolist.onResume();
-
-
     }
 }

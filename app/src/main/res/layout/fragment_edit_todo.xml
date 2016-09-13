@@ -2,19 +2,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.victorhom.pomolist.EditTodoFragment">
-
-    <TextView
-        android:id="@+id/edit_todo_lbl"
-        android:text="Edit Todo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    tools:context="com.example.victorhom.pomolist.EditTodoFragment"
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/edit_todo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:imeOptions="actionDone" />
+        android:inputType="text" />
 
+    <ImageButton
+        android:src="@drawable/save_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:id="@+id/saveEditTodobutton"
+        android:layout_gravity="center_vertical" />
+
+    <ImageButton
+        android:src="@drawable/cancel_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:id="@+id/cancelEditTodobutton"
+        android:layout_gravity="center_vertical" />
+
+    <ImageButton
+        android:src="@drawable/pomo_list_off"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:id="@+id/pomoEditTodobutton"
+        android:layout_gravity="center_vertical" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/pomolist_launcher"
+        android:gravity="center"
+        android:textOff=""
+        android:textOn=""
+        android:textSize="0dp" />
 </LinearLayout>
