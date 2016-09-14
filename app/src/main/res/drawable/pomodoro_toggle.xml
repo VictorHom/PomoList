@@ -2,10 +2,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 <!-- When selected, use grey -->
 <item
-    android:drawable="@drawable/pomo_list_off"
+    android:drawable="@drawable/pomolist_launcher"
     android:state_checked="true" />
 <!-- When not selected, use white-->
-<item android:drawable="@drawable/pomolist_launcher"
+<item android:drawable="@drawable/pomo_list_off"
     android:state_checked="false"/>
-
 </selector>
