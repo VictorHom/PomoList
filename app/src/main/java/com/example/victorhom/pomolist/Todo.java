@@ -7,14 +7,18 @@ import java.util.List;
 
 /**
  * Created by victorhom on 9/10/16.
+ * A instance contains a string of the action item, a note about that item, a boolean
+ * pomo that contains information about whether it is part of the pomodoro list
+ * it also contains day, month, year which is the due date information
+ * By default, everything is set on instantiation besides the action item
  */
 public class Todo {
     private String todo; // the to-do
     private String note; // note about to-do
-    private boolean pomo; // if in pomo list
-    private int day;
-    private int month;
-    private int year;
+    private boolean inPomoList; // if in pomo list
+    private int dayDue;
+    private int monthDue;
+    private int yearDue;
 
     // for testing
     // goal - add to SQL and have a persistent backend
@@ -28,10 +32,11 @@ public class Todo {
     Todo(String todo) {
         this.todo = todo;
         this.note = "";
-        this.pomo = false;
-        this.day = Calendar.DAY_OF_MONTH;
-        this.month = Calendar.MONTH;
-        this.year = Calendar.YEAR;
+        this.inPomoList = false;
+        Calendar c = Calendar.getInstance(java.util.TimeZone.getDefault());
+        this.dayDue = c.get(Calendar.DAY_OF_MONTH);
+        this.monthDue = c.get(Calendar.MONTH);
+        this.yearDue = c.get(Calendar.YEAR);
     }
 
     public String getTodo() {
@@ -43,34 +48,39 @@ public class Todo {
         return this.todo;
     }
 
+    public String getNote() { return note; }
+
     public String setNote(String note) {
         this.note = note;
         return note;
     }
 
-    public boolean togglePomo() {
-        this.pomo = !this.pomo;
-        return this.pomo;
+    public boolean getPomo(){ return inPomoList; }
+
+    public boolean setPomo(boolean b) {
+        this.inPomoList = b;
+        return b;
     }
 
+    public int getDay() { return dayDue; }
+
     public int setDay(int day) {
-        this.day = day;
+        this.dayDue = day;
         return day;
     }
 
+    public int getMonth() { return monthDue; }
+
     public int setMonth(int month) {
-        this.month = month;
+        this.monthDue = month;
         return month;
     }
 
+    public int getYear() { return yearDue; }
+
     public int setYear(int year) {
-        this.year = year;
+        this.yearDue = year;
         return year;
     }
-
-    public String getDescription() {
-        return note;
-    }
-
 
 }
