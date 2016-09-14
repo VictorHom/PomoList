@@ -64,8 +64,12 @@ public class TodoListFragment extends ListFragment {
     // this is the modal to edit the todo
     private void showEditDialog(ListView l, View v, int position, long id) {
         String todo = l.getAdapter().getItem(position).toString();
+        // TODO change so that I don't have use this Todo.myList everywhere
+        // After the timer for pomodoro
+        // work on the persistence part
+        Todo todoObject = Todo.myList.get(position);
         FragmentManager fm = getFragmentManager();
-        EditTodoFragment editTodoDialogFragment = EditTodoFragment.newInstance(todo, position);
+        EditTodoFragment editTodoDialogFragment = EditTodoFragment.newInstance(todoObject, position);
         editTodoDialogFragment.show(fm, "fragment_edit_todo");
     }
 

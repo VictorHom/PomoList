@@ -9,24 +9,38 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ToggleButton;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class EditTodoFragment extends DialogFragment {
-    private EditText mEditText;
+    private EditText todoEditText;
+    private EditText noteEditText;
+    private ToggleButton inPomodoroList;
+    private int day;
+    private int month;
+    private int year;
+    DatePicker dueDate;
+
     private int positionInList;
 
     public EditTodoFragment() {
         // Required empty public constructor
     }
-    public static EditTodoFragment newInstance(String todo, int position) {
+    public static EditTodoFragment newInstance(Todo todo, int position) {
         EditTodoFragment frag = new EditTodoFragment();
         Bundle args = new Bundle();
-        args.putString("todo", todo);
+        args.putString("todo", todo.getTodo());
+        args.putString("note", todo.getNote());
+        args.putString("pomo", String.valueOf(todo.getPomo()));
+        args.putString("day", String.valueOf(todo.getDay()));
+        args.putString("month", String.valueOf(todo.getMonth()));
+        args.putString("year", String.valueOf(todo.getYear()));
         args.putString("position", String.valueOf(position));
         frag.setArguments(args);
         return frag;
@@ -45,16 +59,33 @@ public class EditTodoFragment extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Get field from view
-        mEditText = (EditText) view.findViewById(R.id.edit_todo);
-        // Fetch arguments from bundle and set title
+        todoEditText = (EditText) view.findViewById(R.id.edit_todo);
+        noteEditText = (EditText) view.findViewById(R.id.todo_note);
+        inPomodoroList = (ToggleButton) view.findViewById(R.id.toggle_pomodoro);
+        dueDate = (DatePicker) view.findViewById(R.id.due_date_picker);
+
+
+
+        // getting all the values from the bundle
         String todo = this.getArguments().getString("todo","Edit");
+        String note = this.getArguments().getString("note","");
+        boolean pomo = Boolean.valueOf(this.getArguments().getString("pomo"));
+
+        day = Integer.valueOf(this.getArguments().getString("day"));
+        month = Integer.valueOf(this.getArguments().getString("month"));
+        year = Integer.valueOf(this.getArguments().getString("year"));
+        
+        // set values
         final String position = getArguments().getString("position");
+        todoEditText.setText(todo);
+        noteEditText.setText(note);
+        inPomodoroList.setChecked(pomo);
+        dueDate.updateDate(year, month, day);
+        dueDate.refreshDrawableState();
 
 
-        getDialog().setTitle("Pomodoro this");
-        mEditText.setText(todo);
         // Show soft keyboard automatically and request focus to field
-        mEditText.requestFocus();
+        todoEditText.requestFocus();
         getDialog().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
@@ -69,10 +100,20 @@ public class EditTodoFragment extends DialogFragment {
         sb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String updatedTodo = mEditText.getText().toString();
+                String updatedTodo = todoEditText.getText().toString();
+                String updatedNote = noteEditText.getText().toString();
                 if (updatedTodo.length() > 0) {
                     TodoListFragment todolist = (TodoListFragment) getFragmentManager().findFragmentById(R.id.todolist);
-                    Todo.myList.get(Integer.valueOf(position)).setTodo(updatedTodo);
+                    Todo updateTodo = Todo.myList.get(Integer.valueOf(position));
+
+                    // set updated data in todo
+                    updateTodo.setTodo(updatedTodo);
+                    updateTodo.setNote(updatedNote);
+                    updateTodo.setPomo(inPomodoroList.isChecked());
+                    updateTodo.setDay(dueDate.getDayOfMonth());
+                    updateTodo.setMonth(dueDate.getMonth());
+                    updateTodo.setYear(dueDate.getYear());
+
                     todolist.onResume();
                 }
                 getDialog().cancel();

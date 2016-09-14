@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements TodoListFragment.
         EditText todoInputForm = (EditText) findViewById(R.id.editText);
         String todo = todoInputForm.getText().toString();
         if (todo.length() > 0) {
-            Todo.myList.add(0, new Todo(todo, "test"));
+            Todo.myList.add(0, new Todo(todo));
         }
         todoInputForm.setText("");
         TodoListFragment todolist = (TodoListFragment) getFragmentManager().findFragmentById(R.id.todolist);
