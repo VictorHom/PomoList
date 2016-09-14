@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,7 +9,8 @@
         android:id="@+id/edit_todo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text" />
+        android:inputType="text"
+        android:maxLength="30"/>
 
     <ImageButton
         android:src="@drawable/save_icon"
@@ -17,7 +18,10 @@
         android:layout_height="wrap_content"
         android:text="@string/save"
         android:id="@+id/saveEditTodobutton"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical"
+        android:layout_alignTop="@+id/cancelEditTodobutton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <ImageButton
         android:src="@drawable/cancel_icon"
@@ -25,23 +29,92 @@
         android:layout_height="wrap_content"
         android:text="@string/save"
         android:id="@+id/cancelEditTodobutton"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="109dp"
+        android:maxHeight="40dp"
+        android:maxWidth="40dp"
+        android:minHeight="40dp"
+        android:minWidth="40dp"
+        android:layout_below="@+id/textView"
+        android:layout_toLeftOf="@+id/saveEditTodobutton"
+        android:layout_toStartOf="@+id/saveEditTodobutton" />
 
-    <ImageButton
-        android:src="@drawable/pomo_list_off"
+    <EditText
+        android:paddingLeft="10dp"
+        android:inputType="textMultiLine"
+        android:lines="8"
+        android:minLines="6"
+        android:gravity="top|left"
+        android:maxLines="10"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:scrollbars="vertical"
+        android:id="@+id/editText2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="@string/note"/>
+
+    <DatePicker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/save"
-        android:id="@+id/pomoEditTodobutton"
-        android:layout_gravity="center_vertical" />
+        android:id="@+id/datePicker"
+        android:scaleX=".5"
+        android:scaleY=".5"
+        android:calendarViewShown="false"
+        android:layout_above="@+id/saveEditTodobutton"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Due"
+        android:paddingLeft="10dp"
+        android:id="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/edit_todo" />
 
     <ToggleButton
-        android:id="@+id/toggleButton1"
+        android:id="@+id/toggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableTop="@drawable/pomolist_launcher"
-        android:gravity="center"
-        android:textOff=""
+        android:background="@drawable/pomodoro_toggle"
         android:textOn=""
-        android:textSize="0dp" />
-</LinearLayout>
+        android:textOff=""
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:text="pomodoro toggle"
+        android:checked="false"
+        android:width="40dp"
+        android:maxHeight="40dp"
+        android:maxWidth="40dp"
+        android:minHeight="40dp"
+        android:minWidth="40dp"
+        android:layout_alignTop="@+id/textView"
+        android:layout_alignLeft="@+id/saveEditTodobutton"
+        android:layout_alignStart="@+id/saveEditTodobutton" />
+    <!--<ImageButton-->
+        <!--android:src="@drawable/pomo_list_off"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/save"-->
+        <!--android:id="@+id/pomoEditTodobutton"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_alignTop="@+id/toggleButton1"-->
+        <!--android:layout_toLeftOf="@+id/toggleButton1"-->
+        <!--android:layout_toStartOf="@+id/toggleButton1" />-->
+
+    <!--<ToggleButton-->
+        <!--android:id="@+id/toggleButton1"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:drawableTop="@drawable/pomolist_launcher"-->
+        <!--android:gravity="center"-->
+        <!--android:textOff=""-->
+        <!--android:textOn=""-->
+        <!--android:textSize="0dp"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true" />-->
+</RelativeLayout>
