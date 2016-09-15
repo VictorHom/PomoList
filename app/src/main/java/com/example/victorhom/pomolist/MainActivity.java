@@ -1,6 +1,7 @@
 package com.example.victorhom.pomolist;
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -34,5 +35,13 @@ public class MainActivity extends AppCompatActivity implements TodoListFragment.
         todoInputForm.setText("");
         TodoListFragment todolist = (TodoListFragment) getFragmentManager().findFragmentById(R.id.todolist);
         todolist.onResume();
+    }
+
+    public void onClickPomodoroStarter(View view) {
+//        FragmentManager fm = getFragmentManager();
+//        PomodoroFragment pf = PomodoroFragment.newInstance();
+//        pf.show(fm, "");
+        Intent intent = new Intent(this, PomodoroActivity.class);
+        startActivity(intent);
     }
 }

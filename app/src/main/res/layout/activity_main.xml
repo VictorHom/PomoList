@@ -17,7 +17,8 @@
         android:id="@+id/pomo_button"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/settings"
-        android:layout_toEndOf="@+id/settings" />
+        android:layout_toEndOf="@+id/settings"
+        android:onClick="onClickPomodoroStarter"/>
 
     <Button
         android:theme="@style/AppTheme.Button"
