@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.victorhom.pomolist.TimerSettingsFragment"
+    android:background="@color/colorAccent">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/task_time"
+        android:id="@+id/task_time_text"
+        android:layout_gravity="left|top"
+        android:textColor="@color/tomato"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/break_time"
+        android:id="@+id/break_time_text"
+        android:layout_gravity="left|center_vertical"
+        android:layout_below="@+id/task_time_text"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="113dp"
+        android:textColor="@color/tomato"
+        android:paddingLeft="10dp"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/task_time"
+        android:layout_gravity="right|top"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/break_time"
+        android:layout_alignStart="@+id/break_time"
+        android:textColor="@color/tomato"
+        android:paddingTop="10dp"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/break_time"
+        android:layout_gravity="right|center_vertical"
+        android:layout_alignTop="@+id/break_time_text"
+        android:layout_alignLeft="@+id/save"
+        android:layout_alignStart="@+id/save"
+        android:textColor="@color/tomato"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:id="@+id/save"
+        android:layout_gravity="left|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/close"
+        android:id="@+id/exit"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>

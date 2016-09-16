@@ -11,9 +11,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class PomodoroActivity extends AppCompatActivity {
-    private static final int TASKTIME = 60 * 25;
-    private static final int BREAKTIME = 60 * 5;
-    private int seconds = TASKTIME;
+    private static int tasktime = 60 * 25;
+    private static int breaktime = 60 * 5;
+    private int seconds;
     private boolean running;
     private boolean wasRunning;
     private int currentPomoIndex = 0;
@@ -34,6 +34,10 @@ public class PomodoroActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         ArrayList<Integer> todosIndex = bundle.getIntegerArrayList("todosIndex");
         ArrayList<String> todos = bundle.getStringArrayList("todos");
+
+        tasktime = Integer.valueOf(bundle.get("taskTime").toString()) * 60;
+        breaktime = Integer.valueOf(bundle.get("breakTime").toString()) * 60;
+        seconds = tasktime;
 
         pomoTodos = new ArrayList<>();
 
@@ -95,7 +99,7 @@ public class PomodoroActivity extends AppCompatActivity {
     //Reset the stopwatch when the Reset button is clicked.
     public void onClickReset(View view) {
         running = false;
-        seconds = TASKTIME;
+        seconds = tasktime;
         currentPomoIndex = 0;
     }
 
@@ -116,9 +120,9 @@ public class PomodoroActivity extends AppCompatActivity {
                     if (seconds == 0) {
                         // alternate now
                         if (currentPomoIndex % 2 == 1) {
-                            seconds = BREAKTIME;
+                            seconds = breaktime;
                         } else {
-                            seconds = TASKTIME;
+                            seconds = tasktime;
                         }
                         // change text now
                         currentPomoIndex = (currentPomoIndex + 1) % pomoTodosSize;
