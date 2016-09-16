@@ -1,5 +1,6 @@
 package com.example.victorhom.pomolist;
 
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,11 +8,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements TodoListFragment.TodoListListener{
+    TimerSettings ts =  TimerSettings.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TimerSettings.getInstance();
         setContentView(R.layout.activity_main);
     }
     @Override
@@ -37,11 +42,30 @@ public class MainActivity extends AppCompatActivity implements TodoListFragment.
         todolist.onResume();
     }
 
+    public TimerSettings getTS() {
+        return ts;
+    }
+
     public void onClickPomodoroStarter(View view) {
-//        FragmentManager fm = getFragmentManager();
-//        PomodoroFragment pf = PomodoroFragment.newInstance();
-//        pf.show(fm, "");
         Intent intent = new Intent(this, PomodoroActivity.class);
+        ArrayList<Integer> pomodoroListIndexes = new ArrayList<>();
+        ArrayList<String> pomodoroList = new ArrayList<>();
+        for (int i = 0; i < Todo.myList.size(); i++) {
+            if (Todo.myList.get(i).getPomo()) {
+                pomodoroListIndexes.add(i);
+                pomodoroList.add(Todo.myList.get(i).getTodo());
+            }
+        }
+        intent.putIntegerArrayListExtra("todosIndex", pomodoroListIndexes);
+        intent.putStringArrayListExtra("todos", pomodoroList);
+        intent.putExtra("taskTime", getTS().getTaskTimeMinute());
+        intent.putExtra("breakTime", getTS().getBreakTimeMinute());
         startActivity(intent);
+    }
+
+    public void onClickSetTimerSettings(View view) {
+        FragmentManager fm = getFragmentManager();
+        TimerSettingsFragment tsf = TimerSettingsFragment.newInstance();
+        tsf.show(fm, "");
     }
 }

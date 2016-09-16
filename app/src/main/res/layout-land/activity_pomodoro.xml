@@ -16,9 +16,12 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="80sp"
         android:text=""
-        android:layout_marginTop="51dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/stop_button"
+        android:layout_toRightOf="@+id/start_button"
+        android:layout_toLeftOf="@+id/reset_button"
+        android:layout_toStartOf="@+id/reset_button"
+        android:layout_centerHorizontal="true"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -53,7 +56,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/current_pomo_item"
         android:text="@string/pomo_start_message"
-        android:layout_centerVertical="true"
         android:paddingBottom="100dp"
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/stop_button"
+        android:layout_alignStart="@+id/stop_button" />
 </RelativeLayout>
