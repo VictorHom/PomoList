@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements TodoListFragment.TodoListListener{
 
     @Override
@@ -42,6 +44,20 @@ public class MainActivity extends AppCompatActivity implements TodoListFragment.
 //        PomodoroFragment pf = PomodoroFragment.newInstance();
 //        pf.show(fm, "");
         Intent intent = new Intent(this, PomodoroActivity.class);
+        ArrayList<Integer> pomodoroListIndexes = new ArrayList<>();
+        ArrayList<String> pomodoroList = new ArrayList<>();
+        for (int i = 0; i < Todo.myList.size(); i++) {
+            if (Todo.myList.get(i).getPomo()) {
+                pomodoroListIndexes.add(i);
+                pomodoroList.add(Todo.myList.get(i).getTodo());
+            }
+        }
+        intent.putIntegerArrayListExtra("todosIndex", pomodoroListIndexes);
+        intent.putStringArrayListExtra("todos", pomodoroList);
         startActivity(intent);
+    }
+
+    public void onClickSetTimerSettings(View view) {
+
     }
 }
