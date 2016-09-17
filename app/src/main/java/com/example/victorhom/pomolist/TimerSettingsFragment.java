@@ -42,6 +42,8 @@ public class TimerSettingsFragment extends DialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
         taskTimePicker = (Spinner) view.findViewById(R.id.task_time);
         breakTimePicker = (Spinner) view.findViewById(R.id.break_time);
 
@@ -51,7 +53,6 @@ public class TimerSettingsFragment extends DialogFragment {
             @Override
             public void onClick(View v)
             {
-
                 MainActivity me = (MainActivity) getActivity();
                 int taskTime = Integer.valueOf(taskTimePicker.getSelectedItem().toString());
                 int breakTime = Integer.valueOf(breakTimePicker.getSelectedItem().toString());
@@ -61,7 +62,6 @@ public class TimerSettingsFragment extends DialogFragment {
             }
         });
 
-        // Inflate the layout for this fragment
         Button exitButton = (Button) getView().findViewById(R.id.exit);
         exitButton.setOnClickListener(new View.OnClickListener()
         {
@@ -71,23 +71,26 @@ public class TimerSettingsFragment extends DialogFragment {
                 getDialog().dismiss();
             }
         });
+
+        // set the dropdown for selecting the task time
         Integer[] taskTimes = new Integer[25];
         for (int i = 0; i < taskTimes.length; i++) {
             taskTimes[i] = i + 1;
         }
-
         ArrayAdapter<Integer> adapterT = new ArrayAdapter<Integer>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item, taskTimes);
         taskTimePicker.setAdapter(adapterT);
 
+        // set the dropdown for selecting the break time
         Integer[] breakTimes = new Integer[10];
         for (int i = 0; i < breakTimes.length; i++) {
             breakTimes[i] = i + 1;
         }
         ArrayAdapter<Integer> adapterB = new ArrayAdapter<Integer>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item, taskTimes);
         breakTimePicker.setAdapter(adapterB);
-        MainActivity me = (MainActivity) getActivity();
-        taskTimePicker.setSelection(me.getTS().getTaskTimeMinute() - 1);
-        breakTimePicker.setSelection(me.getTS().getBreakTimeMinute() - 1);
+
+        MainActivity ma = (MainActivity) getActivity();
+        taskTimePicker.setSelection(ma.getTS().getTaskTimeMinute() - 1);
+        breakTimePicker.setSelection(ma.getTS().getBreakTimeMinute() - 1);
 
     }
 
