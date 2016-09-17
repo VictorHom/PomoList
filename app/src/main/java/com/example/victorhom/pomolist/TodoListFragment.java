@@ -38,12 +38,14 @@ public class TodoListFragment extends ListFragment {
         adapter = new ArrayAdapter<String> (
                 inflater.getContext(), android.R.layout.simple_list_item_1, todos
         );
-        setListAdapter(adapter); // bind the array adapter to the list view
-
+        // bind the array adapter to the list view
+        setListAdapter(adapter);
 
         // Inflate the layout for this fragment
         return super.onCreateView(inflater, container, savedInstanceState);
     }
+
+
 
     public ArrayAdapter<String> getAdapter() {
         return adapter;
@@ -64,9 +66,6 @@ public class TodoListFragment extends ListFragment {
     // this is the modal to edit the todo
     private void showEditDialog(ListView l, View v, int position, long id) {
         String todo = l.getAdapter().getItem(position).toString();
-        // TODO change so that I don't have use this Todo.myList everywhere
-        // After the timer for pomodoro
-        // work on the persistence part
         Todo todoObject = Todo.myList.get(position);
         FragmentManager fm = getFragmentManager();
         EditTodoFragment editTodoDialogFragment = EditTodoFragment.newInstance(todoObject, position);
@@ -88,9 +87,12 @@ public class TodoListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedState) {
         super.onActivityCreated(savedState);
         final TodoListFragment tlf = this;
+
+        // delete the todo
         getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Todo.myList.get(position).delete();
                 Todo.myList.remove(position);
                 tlf.onResume();
                 return true;
@@ -101,7 +103,9 @@ public class TodoListFragment extends ListFragment {
     private void updateTodos() {
         todos = new String[Todo.myList.size()];
         for (int i = 0; i < todos.length; i++) {
-            todos[i] = Todo.myList.get(i).getTodo();
+                if (Todo.myList.get(i)!= null) {
+                    todos[i] = Todo.myList.get(i).getTodo();
+                }
         }
     }
 

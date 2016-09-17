@@ -12,13 +12,35 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements TodoListFragment.TodoListListener{
     TimerSettings ts =  TimerSettings.getInstance();
+    private boolean populateTodos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            populateTodos = savedInstanceState.getBoolean("updated");
+        }
+        if (!populateTodos){
+            // want to remove this; right now duplicate the list on view
+            Todo.myList = new ArrayList<>();
+            ArrayList<Todo> test = (ArrayList<Todo>) Todo.listAll(Todo.class);
+            for (int i = test.size() - 1; i >= 0; --i) {
+                Todo.myList.add((Todo) test.get(i));
+            }
+        }
+
+
         TimerSettings.getInstance();
         setContentView(R.layout.activity_main);
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putBoolean("updated", true);
+    }
+
     @Override
     public void itemClicked(long id) {
         Todo.myList.remove(0);
@@ -29,13 +51,13 @@ public class MainActivity extends AppCompatActivity implements TodoListFragment.
         ft.commit();
     }
 
-
-    // strange - the hardcoded todolist are strange on scroll, they don't entirely scroll
     public void onClickAddTodo(View view){
         EditText todoInputForm = (EditText) findViewById(R.id.editText);
         String todo = todoInputForm.getText().toString();
         if (todo.length() > 0) {
-            Todo.myList.add(0, new Todo(todo));
+            Todo newtodo = new Todo().setTodo(todo);
+            newtodo.save();
+            Todo.myList.add(0, newtodo);
         }
         todoInputForm.setText("");
         TodoListFragment todolist = (TodoListFragment) getFragmentManager().findFragmentById(R.id.todolist);

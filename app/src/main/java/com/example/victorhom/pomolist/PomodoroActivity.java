@@ -44,7 +44,7 @@ public class PomodoroActivity extends AppCompatActivity {
         //sanity check that the todos are getting to here
         for (int i = 0; i < todos.size(); i++) {
             pomoTodos.add(todos.get(i));
-            pomoTodos.add("take a break. browse some reddit. you deserve it");
+            pomoTodos.add("take a break. browse reddit. you deserve it");
         }
         pomoTodosSize = pomoTodos.size();
 
@@ -134,8 +134,6 @@ public class PomodoroActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
