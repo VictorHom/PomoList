@@ -10,16 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.ArrayList;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class TodoListFragment extends ListFragment {
-    private ArrayAdapter<String> adapter;
+    private TodoListAdapter adapter;
     private String[] todos;
+    private int[] todosColor;
     private LayoutInflater inflater;
 
     static interface TodoListListener {
@@ -35,17 +37,18 @@ public class TodoListFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.inflater = inflater;
         updateTodos();
-        adapter = new ArrayAdapter<String> (
-            inflater.getContext(), android.R.layout.simple_list_item_1, todos
-        );
-        // bind the array adapter to the list view
-        setListAdapter(adapter);
+
+        TodoListFragment yourListView = (TodoListFragment) (TodoListFragment) getFragmentManager().findFragmentById(R.id.todolist);
+        ////
+        adapter = new TodoListAdapter(inflater.getContext(), android.R.layout.simple_list_item_1, (ArrayList<Todo>) Todo.myList);
+        yourListView.setListAdapter(adapter);
+
 
         // Inflate the layout for this fragment
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    public ArrayAdapter<String> getAdapter() {
+    public TodoListAdapter getAdapter() {
         return adapter;
     }
 
@@ -72,7 +75,7 @@ public class TodoListFragment extends ListFragment {
     @Override
     public void onResume() {
         updateTodos();
-        adapter = new ArrayAdapter<String> (inflater.getContext(), android.R.layout.simple_list_item_1, todos);
+        adapter = new TodoListAdapter(inflater.getContext(), android.R.layout.simple_list_item_1, (ArrayList<Todo>) Todo.myList);
         adapter.notifyDataSetChanged();
         setListAdapter(adapter); // bind the array adapter to the list view
         super.onResume();
@@ -98,9 +101,12 @@ public class TodoListFragment extends ListFragment {
 
     private void updateTodos() {
         todos = new String[Todo.myList.size()];
+        todosColor = new int[Todo.myList.size()];
+
         for (int i = 0; i < todos.length; i++) {
             if (Todo.myList.get(i)!= null) {
-                todos[i] = Todo.myList.get(i).getTodo();
+                todos[i] = "P" + String.valueOf(Todo.myList.get(i).getPriorityLevel()) + ": " +Todo.myList.get(i).getTodo();
+//                todosColor[i] = Todo.myList.get(i).getPriorityLevel();
             }
         }
     }

@@ -13,4 +13,9 @@
         <item name="android:textColor">@color/colorAccent</item>
     </style>
 
+    <!-- Theme.AppCompat.Light is not a dialog theme -->
+    <style name="DialogTheme" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/tomato</item>
+    </style>
+
 </resources>

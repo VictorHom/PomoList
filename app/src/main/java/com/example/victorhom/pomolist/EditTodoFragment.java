@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.ToggleButton;
 
 
@@ -26,6 +28,7 @@ public class EditTodoFragment extends DialogFragment {
     private int month;
     private int year;
     DatePicker dueDate;
+    private Spinner priorityPicker;
 
     private int positionInList;
 
@@ -41,6 +44,7 @@ public class EditTodoFragment extends DialogFragment {
         args.putString("day", String.valueOf(todo.getDay()));
         args.putString("month", String.valueOf(todo.getMonth()));
         args.putString("year", String.valueOf(todo.getYear()));
+        args.putString("priority", String.valueOf(todo.getPriorityLevel()));
         args.putString("position", String.valueOf(position));
         frag.setArguments(args);
         return frag;
@@ -63,6 +67,7 @@ public class EditTodoFragment extends DialogFragment {
         noteEditText = (EditText) view.findViewById(R.id.todo_note);
         inPomodoroList = (ToggleButton) view.findViewById(R.id.toggle_pomodoro);
         dueDate = (DatePicker) view.findViewById(R.id.due_date_picker);
+        priorityPicker = (Spinner) view.findViewById(R.id.priority_picker);
 
         // getting all the values from the bundle
         String todo = this.getArguments().getString("todo","Edit");
@@ -72,7 +77,7 @@ public class EditTodoFragment extends DialogFragment {
         day = Integer.valueOf(this.getArguments().getString("day"));
         month = Integer.valueOf(this.getArguments().getString("month"));
         year = Integer.valueOf(this.getArguments().getString("year"));
-        
+
         // set values
         final String position = getArguments().getString("position");
         todoEditText.setText(todo);
@@ -80,6 +85,16 @@ public class EditTodoFragment extends DialogFragment {
         inPomodoroList.setChecked(pomo);
         dueDate.updateDate(year, month, day);
         dueDate.refreshDrawableState();
+
+        int priorityLevel = Integer.valueOf(this.getArguments().getString("priority"));
+        priorityPicker = (Spinner) view.findViewById(R.id.priority_picker);
+        Integer[] priorityLevels = new Integer[3];
+        for (int i = 0; i < priorityLevels.length; i++) {
+            priorityLevels[i] = i + 1;
+        }
+        ArrayAdapter<Integer> adapterB = new ArrayAdapter<Integer>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item, priorityLevels);
+        priorityPicker.setAdapter(adapterB);
+        priorityPicker.setSelection(priorityLevel - 1);
 
         // Show soft keyboard automatically and request focus to field
         todoEditText.requestFocus();
@@ -104,6 +119,7 @@ public class EditTodoFragment extends DialogFragment {
                 updateTodo.setDay(dueDate.getDayOfMonth());
                 updateTodo.setMonth(dueDate.getMonth());
                 updateTodo.setYear(dueDate.getYear());
+                updateTodo.setPriorityLevel(Integer.valueOf(priorityPicker.getSelectedItem().toString()));
                 updateTodo.save();
                 todolist.onResume();
             }
@@ -119,6 +135,8 @@ public class EditTodoFragment extends DialogFragment {
                 getDialog().cancel();
             }
         });
+
+
 
     }
 

@@ -22,6 +22,7 @@ public class Todo extends SugarRecord {
     private int dayDue;
     private int monthDue;
     private int yearDue;
+    private int priorityLevel;
     public static List<Todo> myList = new ArrayList<>();
 
     public Todo() {
@@ -32,6 +33,7 @@ public class Todo extends SugarRecord {
         this.dayDue = c.get(Calendar.DAY_OF_MONTH);
         this.monthDue = c.get(Calendar.MONTH);
         this.yearDue = c.get(Calendar.YEAR);
+        this.priorityLevel = 3;
     }
 
     public String getTodo() {
@@ -77,6 +79,15 @@ public class Todo extends SugarRecord {
     public int setYear(int year) {
         this.yearDue = year;
         return year;
+    }
+
+    public int getPriorityLevel() {
+        return priorityLevel;
+    }
+
+    public int setPriorityLevel(int nl) {
+        priorityLevel = nl;
+        return nl;
     }
 
 }
