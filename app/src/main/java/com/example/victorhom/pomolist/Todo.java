@@ -1,7 +1,9 @@
 package com.example.victorhom.pomolist;
 
+import com.orm.SugarRecord;
+import com.orm.dsl.Table;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -12,7 +14,8 @@ import java.util.List;
  * it also contains day, month, year which is the due date information
  * By default, everything is set on instantiation besides the action item
  */
-public class Todo {
+@Table
+public class Todo extends SugarRecord {
     private String todo; // the to-do
     private String note; // note about to-do
     private boolean inPomoList; // if in pomo list
@@ -22,15 +25,10 @@ public class Todo {
 
     // for testing
     // goal - add to SQL and have a persistent backend
-    public static List<Todo> myList = new ArrayList<>(Arrays.asList(
-            new Todo("Buy Grocery"),
-            new Todo("Take Shower"),
-            new Todo("Work on Todo List")
-            )
-    );
+    public static List<Todo> myList = new ArrayList<>();
 
-    Todo(String todo) {
-        this.todo = todo;
+    public Todo() {
+        this.todo = "";
         this.note = "";
         this.inPomoList = false;
         Calendar c = Calendar.getInstance(java.util.TimeZone.getDefault());
@@ -43,9 +41,10 @@ public class Todo {
         return todo;
     }
 
-    public String setTodo(String updatedTodo) {
+    public Todo setTodo(String updatedTodo) {
         this.todo = updatedTodo;
-        return this.todo;
+        return this;
+//        return this.todo;
     }
 
     public String getNote() { return note; }

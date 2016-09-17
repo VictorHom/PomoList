@@ -113,7 +113,7 @@ public class EditTodoFragment extends DialogFragment {
                     updateTodo.setDay(dueDate.getDayOfMonth());
                     updateTodo.setMonth(dueDate.getMonth());
                     updateTodo.setYear(dueDate.getYear());
-
+                    updateTodo.save();
                     todolist.onResume();
                 }
                 getDialog().cancel();
