@@ -111,26 +111,26 @@ public class PomodoroActivity extends AppCompatActivity {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                int minutes = (seconds%3600)/60;
-                int secs = seconds%60;
-                String time = String.format("%02d:%02d", minutes, secs);
-                timeView.setText(time);
-                if (running) {
-                    seconds--;
-                    if (seconds == 0) {
-                        // alternate now
-                        if (currentPomoIndex % 2 == 1) {
-                            seconds = breaktime;
-                        } else {
-                            seconds = tasktime;
-                        }
-                        // change text now
-                        currentPomoIndex = (currentPomoIndex + 1) % pomoTodosSize;
-                        setTaskText(currentPomoIndex);
-
+            int minutes = (seconds%3600)/60;
+            int secs = seconds%60;
+            String time = String.format("%02d:%02d", minutes, secs);
+            timeView.setText(time);
+            if (running) {
+                seconds--;
+                if (seconds == 0) {
+                    // alternate now
+                    if (currentPomoIndex % 2 == 1) {
+                        seconds = breaktime;
+                    } else {
+                        seconds = tasktime;
                     }
+                    // change text now
+                    currentPomoIndex = (currentPomoIndex + 1) % pomoTodosSize;
+                    setTaskText(currentPomoIndex);
+
                 }
-                handler.postDelayed(this, 1000);
+            }
+            handler.postDelayed(this, 1000);
             }
         });
     }

@@ -22,9 +22,6 @@ public class Todo extends SugarRecord {
     private int dayDue;
     private int monthDue;
     private int yearDue;
-
-    // for testing
-    // goal - add to SQL and have a persistent backend
     public static List<Todo> myList = new ArrayList<>();
 
     public Todo() {

@@ -36,7 +36,7 @@ public class TodoListFragment extends ListFragment {
         this.inflater = inflater;
         updateTodos();
         adapter = new ArrayAdapter<String> (
-                inflater.getContext(), android.R.layout.simple_list_item_1, todos
+            inflater.getContext(), android.R.layout.simple_list_item_1, todos
         );
         // bind the array adapter to the list view
         setListAdapter(adapter);
@@ -44,8 +44,6 @@ public class TodoListFragment extends ListFragment {
         // Inflate the layout for this fragment
         return super.onCreateView(inflater, container, savedInstanceState);
     }
-
-
 
     public ArrayAdapter<String> getAdapter() {
         return adapter;
@@ -55,7 +53,6 @@ public class TodoListFragment extends ListFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         this.listener = (TodoListListener) context;
-
     }
 
     @Override
@@ -88,14 +85,13 @@ public class TodoListFragment extends ListFragment {
         super.onActivityCreated(savedState);
         final TodoListFragment tlf = this;
 
-        // delete the todo
         getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Todo.myList.get(position).delete();
-                Todo.myList.remove(position);
-                tlf.onResume();
-                return true;
+            Todo.myList.get(position).delete();
+            Todo.myList.remove(position);
+            tlf.onResume();
+            return true;
             }
         });
     }
@@ -103,9 +99,9 @@ public class TodoListFragment extends ListFragment {
     private void updateTodos() {
         todos = new String[Todo.myList.size()];
         for (int i = 0; i < todos.length; i++) {
-                if (Todo.myList.get(i)!= null) {
-                    todos[i] = Todo.myList.get(i).getTodo();
-                }
+            if (Todo.myList.get(i)!= null) {
+                todos[i] = Todo.myList.get(i).getTodo();
+            }
         }
     }
 

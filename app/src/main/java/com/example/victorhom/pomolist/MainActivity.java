@@ -16,29 +16,16 @@ public class MainActivity extends AppCompatActivity implements TodoListFragment.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState != null) {
-            populateTodos = savedInstanceState.getBoolean("updated");
+        Todo.myList = new ArrayList<>();
+        ArrayList<Todo> test = (ArrayList<Todo>) Todo.listAll(Todo.class);
+        for (int i = test.size() - 1; i >= 0; --i) {
+            Todo.myList.add((Todo) test.get(i));
         }
-        if (!populateTodos){
-            // want to remove this; right now duplicate the list on view
-            Todo.myList = new ArrayList<>();
-            ArrayList<Todo> test = (ArrayList<Todo>) Todo.listAll(Todo.class);
-            for (int i = test.size() - 1; i >= 0; --i) {
-                Todo.myList.add((Todo) test.get(i));
-            }
-        }
-
 
         TimerSettings.getInstance();
         setContentView(R.layout.activity_main);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putBoolean("updated", true);
     }
 
     @Override
