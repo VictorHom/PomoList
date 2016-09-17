@@ -55,7 +55,8 @@
         android:textColor="@color/tomato"
         android:layout_below="@+id/saveEditTodobutton"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="77dp" />
 
     <DatePicker
         android:layout_width="wrap_content"
@@ -68,21 +69,9 @@
         style="@style/DialogTheme"
         android:textColor="@color/tomato"
         android:layout_below="@+id/edit_todo"
-        android:layout_above="@+id/textView2"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_alignRight="@+id/toggle_pomodoro"
-        android:layout_alignEnd="@+id/toggle_pomodoro" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Due"
-        android:paddingLeft="10dp"
-        android:id="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/edit_todo"
-        android:textColor="@color/tomato"/>
+        android:layout_above="@+id/cancelEditTodobutton" />
 
     <ToggleButton
         android:id="@+id/toggle_pomodoro"
@@ -100,9 +89,9 @@
         android:maxWidth="40dp"
         android:minHeight="40dp"
         android:minWidth="40dp"
-        android:layout_alignTop="@+id/textView"
         android:layout_alignLeft="@+id/saveEditTodobutton"
-        android:layout_alignStart="@+id/saveEditTodobutton" />
+        android:layout_alignStart="@+id/saveEditTodobutton"
+        android:layout_below="@+id/edit_todo" />
 
     <Spinner
         android:layout_width="wrap_content"
@@ -110,20 +99,8 @@
         android:id="@+id/priority_picker"
         android:textColor="@color/tomato"
         android:background="@color/colorAccent"
-        android:layout_marginTop="108dp"
-        android:layout_below="@+id/toggle_pomodoro"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/cancelEditTodobutton"
-        android:layout_toStartOf="@+id/cancelEditTodobutton" />
+        android:layout_alignParentStart="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/priority"
-        android:id="@+id/textView2"
-        android:textColor="@color/tomato"
-        android:layout_alignTop="@+id/priority_picker"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView" />
 </RelativeLayout>
