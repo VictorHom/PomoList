@@ -85,7 +85,7 @@ public class TimerSettingsFragment extends DialogFragment {
         for (int i = 0; i < breakTimes.length; i++) {
             breakTimes[i] = i + 1;
         }
-        ArrayAdapter<Integer> adapterB = new ArrayAdapter<Integer>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item, taskTimes);
+        ArrayAdapter<Integer> adapterB = new ArrayAdapter<Integer>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item, breakTimes);
         breakTimePicker.setAdapter(adapterB);
 
         MainActivity ma = (MainActivity) getActivity();

@@ -36,13 +36,11 @@ public class TodoListFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.inflater = inflater;
-        updateTodos();
 
         TodoListFragment yourListView = (TodoListFragment) (TodoListFragment) getFragmentManager().findFragmentById(R.id.todolist);
         ////
         adapter = new TodoListAdapter(inflater.getContext(), android.R.layout.simple_list_item_1, (ArrayList<Todo>) Todo.myList);
         yourListView.setListAdapter(adapter);
-
 
         // Inflate the layout for this fragment
         return super.onCreateView(inflater, container, savedInstanceState);
@@ -74,7 +72,6 @@ public class TodoListFragment extends ListFragment {
 
     @Override
     public void onResume() {
-        updateTodos();
         adapter = new TodoListAdapter(inflater.getContext(), android.R.layout.simple_list_item_1, (ArrayList<Todo>) Todo.myList);
         adapter.notifyDataSetChanged();
         setListAdapter(adapter); // bind the array adapter to the list view
@@ -97,18 +94,6 @@ public class TodoListFragment extends ListFragment {
             return true;
             }
         });
-    }
-
-    private void updateTodos() {
-        todos = new String[Todo.myList.size()];
-        todosColor = new int[Todo.myList.size()];
-
-        for (int i = 0; i < todos.length; i++) {
-            if (Todo.myList.get(i)!= null) {
-                todos[i] = "P" + String.valueOf(Todo.myList.get(i).getPriorityLevel()) + ": " +Todo.myList.get(i).getTodo();
-//                todosColor[i] = Todo.myList.get(i).getPriorityLevel();
-            }
-        }
     }
 
 }
