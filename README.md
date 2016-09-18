@@ -43,7 +43,7 @@ Adding todo items to a timer. You can also set the timers (1 - 25 minutes) for t
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/5PfHiRE.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/Sd29xDu.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
