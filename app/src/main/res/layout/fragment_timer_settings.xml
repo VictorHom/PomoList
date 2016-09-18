@@ -10,6 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/task_time"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
         android:id="@+id/task_time_text"
         android:layout_gravity="left|top"
         android:textColor="@color/tomato"
@@ -33,22 +35,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/task_time"
-        android:layout_gravity="right|top"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/break_time"
-        android:layout_alignStart="@+id/break_time"
+        android:layout_gravity="right|center_vertical"
         android:textColor="@color/tomato"
-        android:paddingTop="10dp"/>
+        android:paddingTop="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/save"
+        android:layout_toEndOf="@+id/save" />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/break_time"
-        android:layout_gravity="right|center_vertical"
+        android:textColor="@color/tomato"
         android:layout_alignTop="@+id/break_time_text"
-        android:layout_alignLeft="@+id/save"
-        android:layout_alignStart="@+id/save"
-        android:textColor="@color/tomato"/>
+        android:layout_alignLeft="@+id/task_time"
+        android:layout_alignStart="@+id/task_time" />
 
     <Button
         android:layout_width="wrap_content"
