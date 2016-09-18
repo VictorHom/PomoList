@@ -28,7 +28,10 @@ The following **optional** features are implemented:
 * [X] Tweak the style improving the UI / UX, play with colors, images or backgrounds
 
 Information:
-With the help of Sugar ORM to help with the abstraction, it was easy to work with a backend without thinking too much about my queries. I created a custom adapter to handle a list of Todo items. The custom adapter also made it possible for me to customize each todo task view, such as turning the line item to be red when the priority level is 1 and to have an icon if the item is added to the pomodoro list. A DialogFragment was used for the todo item edit feature. I created the app icon with Sketch and the setting, exit, and save icon were taken from http://www.flaticon.com/packs/android-app.
+* With the help of Sugar ORM to help with the abstraction, it was easy to work with a backend without thinking too much about my queries.
+* I created a custom adapter to handle a list of Todo items. The custom adapter also made it possible for me to customize each todo task view, such as turning the line item to be red when the priority level is 1 and to have an icon if the item is added to the pomodoro list.
+* A DialogFragment was used for the todo item edit feature.
+* I created the app icon with Sketch and the setting, exit, and save icon were taken from http://www.flaticon.com/packs/android-app.
 
 The following **additional** features are implemented:
 
@@ -48,10 +51,10 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 Describe any challenges encountered while building the app.
 
-Not knowing the ins/outs of life cycle methods
-Interactions between activities and fragments
-Handling state on going back and forth between activities and fragments
-Layout issues
+* Not knowing the ins/outs of life cycle methods
+* Interactions between activities and fragments
+* Handling state on going back and forth between activities and fragments
+* Layout issues
 
 ## License
 
