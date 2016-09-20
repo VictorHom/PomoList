@@ -5,7 +5,6 @@
     tools:context=".fragments.TimerSettingsFragment"
     android:background="@color/colorAccent">
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
