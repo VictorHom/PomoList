@@ -1,4 +1,4 @@
-package com.example.victorhom.pomolist;
+package com.example.victorhom.pomolist.models;
 
 import com.orm.SugarRecord;
 import com.orm.dsl.Table;

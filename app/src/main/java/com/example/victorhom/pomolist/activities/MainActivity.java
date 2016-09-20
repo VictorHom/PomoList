@@ -1,4 +1,4 @@
-package com.example.victorhom.pomolist;
+package com.example.victorhom.pomolist.activities;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -8,9 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
+
+import com.example.victorhom.pomolist.R;
+import com.example.victorhom.pomolist.models.TimerSettings;
+import com.example.victorhom.pomolist.fragments.TimerSettingsFragment;
+import com.example.victorhom.pomolist.models.Todo;
+import com.example.victorhom.pomolist.fragments.TodoListFragment;
+
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements TodoListFragment.TodoListListener{
+public class MainActivity extends AppCompatActivity implements TodoListFragment.TodoListListener {
     TimerSettings ts =  TimerSettings.getInstance();
     private boolean populateTodos;
 
