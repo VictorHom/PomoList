@@ -26,12 +26,14 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/edit_todo"
         android:textColor="@color/tomato"/>
+
+    <!--android:scaleX=".5"-->
+    <!--android:scaleY=".5"-->
     <DatePicker
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/due_date_picker"
-        android:scaleX=".5"
-        android:scaleY=".5"
         android:calendarViewShown="false"
         android:calendarTextColor="@color/tomato"
         style="@style/DialogTheme"
@@ -64,10 +66,10 @@
         android:text="@string/priority"
         android:id="@+id/textView2"
         android:textColor="@color/tomato"
+        android:paddingLeft="10dp"
         android:layout_above="@+id/priority_picker"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:paddingLeft="10dp"/>
+        android:layout_alignParentStart="true" />
 
     <Spinner
         android:layout_width="wrap_content"
@@ -75,10 +77,10 @@
         android:id="@+id/priority_picker"
         android:textColor="@color/tomato"
         android:background="@color/colorAccent"
-        android:layout_above="@+id/cancelEditTodobutton"
+        android:layout_above="@+id/todo_note"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="118dp" />
+        android:paddingLeft="20dp"/>
 
     <ImageButton
         android:src="@drawable/save_icon"
@@ -122,11 +124,10 @@
         android:maxWidth="40dp"
         android:minHeight="40dp"
         android:minWidth="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/cancelEditTodobutton"
-        android:layout_toStartOf="@+id/cancelEditTodobutton"
         android:paddingBottom="30dp"
-        android:layout_marginBottom="15dp"/>
+        android:layout_alignTop="@+id/cancelEditTodobutton"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2" />
 
 
 </RelativeLayout>

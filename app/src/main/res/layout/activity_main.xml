@@ -13,12 +13,13 @@
         android:src="@drawable/pomolist_launcher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minHeight="50dp"
+        android:minWidth="50dp"
         android:text="@string/main_pomodoro"
         android:id="@+id/pomo_button"
-        android:layout_alignParentTop="true"
+        android:onClick="onClickPomodoroStarter"
         android:layout_toRightOf="@+id/settings"
-        android:layout_toEndOf="@+id/settings"
-        android:onClick="onClickPomodoroStarter"/>
+        android:layout_alignParentTop="true" />
 
     <Button
         android:theme="@style/AppTheme.Button"
@@ -30,16 +31,19 @@
         android:id="@+id/add_todo"
         android:layout_alignBottom="@+id/editText"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:paddingBottom="10dp"/>
 
     <ImageButton
+        android:minHeight="50dp"
+        android:minWidth="50dp"
         android:src="@drawable/settings_cogwheel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/settings"
         android:id="@+id/settings"
-        android:layout_above="@+id/add_todo"
-        android:onClick="onClickSetTimerSettings"/>
+        android:onClick="onClickSetTimerSettings"
+        android:layout_above="@+id/editText" />
 
     <fragment
         android:layout_width="match_parent"
