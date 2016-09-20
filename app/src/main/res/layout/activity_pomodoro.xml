@@ -54,6 +54,7 @@
         android:id="@+id/current_pomo_item"
         android:text="@string/pomo_start_message"
         android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         android:paddingBottom="100dp"
         />
 </RelativeLayout>

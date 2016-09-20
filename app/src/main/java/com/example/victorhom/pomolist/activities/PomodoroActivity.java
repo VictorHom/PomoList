@@ -1,12 +1,15 @@
 package com.example.victorhom.pomolist.activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.victorhom.pomolist.R;
 
@@ -33,6 +36,7 @@ public class PomodoroActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
         overridePendingTransition(R.animator.trans_left_in, R.animator.trans_left_out);
 
+
         Bundle bundle = getIntent().getExtras();
         ArrayList<Integer> todosIndex = bundle.getIntegerArrayList("todosIndex");
         ArrayList<String> todos = bundle.getStringArrayList("todos");
@@ -55,6 +59,19 @@ public class PomodoroActivity extends AppCompatActivity {
             running = savedInstanceState.getBoolean("running");
             wasRunning = savedInstanceState.getBoolean("wasRunning");
         }
+
+        // if you leave the pomodoro activities, everything resets
+        // the reason is that if you delete the item in the pomodoro list
+        // it could be confusing to try and keep track of the correct state
+        Context context = getApplicationContext();
+        CharSequence text = "ONLY leave when you are done. All will reset when you leave!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.setGravity(Gravity.BOTTOM| Gravity.CENTER, 0 ,0);
+        toast.show();
+
+
         runTimer();
     }
 
@@ -83,6 +100,12 @@ public class PomodoroActivity extends AppCompatActivity {
     public void setTaskText(int index) {
         TextView tv = (TextView) findViewById(R.id.current_pomo_item);
         if (pomoTodos.size() > 0) {
+            // trying to make a transition
+//            Context context = getApplicationContext();
+//            TextSwitcher ts = new TextSwitcher(context);
+//            ts.setInAnimation(context, android.R.anim.slide_in_left);
+//            ts.setOutAnimation(context, android.R.anim.slide_out_right);
+//            ts.addView(new TextView(context));
             tv.setText(pomoTodos.get(index));
         }
     }
