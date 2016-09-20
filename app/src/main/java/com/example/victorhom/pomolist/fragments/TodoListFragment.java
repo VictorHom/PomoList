@@ -1,4 +1,4 @@
-package com.example.victorhom.pomolist;
+package com.example.victorhom.pomolist.fragments;
 
 
 import android.app.FragmentManager;
@@ -12,6 +12,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.victorhom.pomolist.R;
+import com.example.victorhom.pomolist.models.Todo;
+import com.example.victorhom.pomolist.adapters.TodoListAdapter;
+
 import java.util.ArrayList;
 
 
@@ -24,7 +28,7 @@ public class TodoListFragment extends ListFragment {
     private int[] todosColor;
     private LayoutInflater inflater;
 
-    static interface TodoListListener {
+    public static interface TodoListListener {
         void itemClicked(long id);
     }
     private TodoListListener listener;

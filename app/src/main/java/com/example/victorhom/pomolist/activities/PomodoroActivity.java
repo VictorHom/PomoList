@@ -1,4 +1,4 @@
-package com.example.victorhom.pomolist;
+package com.example.victorhom.pomolist.activities;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.victorhom.pomolist.R;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.victorhom.pomolist;
+package com.example.victorhom.pomolist.models;
 
 /**
  * Created by victorhom on 9/15/16.
@@ -17,20 +17,20 @@ public class TimerSettings {
         return ts;
     }
 
-    protected static int getTaskTimeMinute() {
+    public static int getTaskTimeMinute() {
         return getInstance().taskTimeMinute;
     }
 
-    protected static int setTaskTimeMinute(int t) {
+    public static int setTaskTimeMinute(int t) {
         getInstance().taskTimeMinute = t;
         return t;
     }
 
-    protected static int getBreakTimeMinute() {
+    public static int getBreakTimeMinute() {
         return getInstance().breakTimeMinute;
     }
 
-    protected static int setBreakTimeMinute(int t) {
+    public static int setBreakTimeMinute(int t) {
         getInstance().breakTimeMinute = t;
         return t;
     }

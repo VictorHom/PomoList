@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.victorhom.pomolist.MainActivity">
+    tools:context=".activities.MainActivity">
     <!--android:theme="@style/AppTheme.Button"-->
     <ImageButton
         android:src="@drawable/pomolist_launcher"
@@ -51,7 +51,7 @@
         android:layout_weight="2"
         android:id="@+id/todolist"
         android:backgroundTint="@color/colorPrimaryDark"
-        class="com.example.victorhom.pomolist.TodoListFragment"
+        class="com.example.victorhom.pomolist.fragments.TodoListFragment"
         android:layout_below="@+id/add_todo"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

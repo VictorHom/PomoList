@@ -1,4 +1,4 @@
-package com.example.victorhom.pomolist;
+package com.example.victorhom.pomolist.fragments;
 
 
 import android.app.DialogFragment;
@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.ToggleButton;
+
+import com.example.victorhom.pomolist.R;
+import com.example.victorhom.pomolist.models.Todo;
 
 
 /**

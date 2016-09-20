@@ -1,4 +1,4 @@
-package com.example.victorhom.pomolist;
+package com.example.victorhom.pomolist.fragments;
 
 
 import android.app.DialogFragment;
@@ -11,6 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+
+import com.example.victorhom.pomolist.R;
+import com.example.victorhom.pomolist.activities.MainActivity;
+import com.example.victorhom.pomolist.models.TimerSettings;
 
 
 /**
@@ -56,7 +60,7 @@ public class TimerSettingsFragment extends DialogFragment {
                 MainActivity me = (MainActivity) getActivity();
                 int taskTime = Integer.valueOf(taskTimePicker.getSelectedItem().toString());
                 int breakTime = Integer.valueOf(breakTimePicker.getSelectedItem().toString());
-                me.getTS().setTaskTimeMinute(taskTime);
+                TimerSettings.setTaskTimeMinute(taskTime);
                 me.getTS().setBreakTimeMinute(breakTime);
                 getDialog().dismiss();
             }
