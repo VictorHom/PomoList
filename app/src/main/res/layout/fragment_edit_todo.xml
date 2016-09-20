@@ -19,7 +19,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Due"
+        android:text="@string/due"
         android:paddingLeft="10dp"
         android:id="@+id/textView"
         android:layout_alignParentLeft="true"
@@ -27,8 +27,6 @@
         android:layout_below="@+id/edit_todo"
         android:textColor="@color/tomato"/>
 
-    <!--android:scaleX=".5"-->
-    <!--android:scaleY=".5"-->
     <DatePicker
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
