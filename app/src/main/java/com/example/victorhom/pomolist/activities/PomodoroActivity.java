@@ -1,57 +1,48 @@
 package com.example.victorhom.pomolist.activities;
 
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.victorhom.pomolist.R;
 
 import java.util.ArrayList;
 
 public class PomodoroActivity extends AppCompatActivity {
-    private static int tasktime = 60 * 25;
-    private static int breaktime = 60 * 5;
+
+    private int taskTime = 60 * 25;
+    private int breakTime = 60 * 5;
     private int seconds;
     private boolean running;
     private boolean wasRunning;
     private int currentPomoIndex = 0;
     private ArrayList<String> pomoTodos;
     private int pomoTodosSize;
+    private Handler handler;
+    private Runnable runnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pomodoro);
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.mipmap.ic_launcher);
-        actionBar.setDisplayShowHomeEnabled(true);
-        overridePendingTransition(R.animator.trans_left_in, R.animator.trans_left_out);
 
+        clearActionBar();
 
+        // get the task items, the task time, and the break time
         Bundle bundle = getIntent().getExtras();
-        ArrayList<Integer> todosIndex = bundle.getIntegerArrayList("todosIndex");
         ArrayList<String> todos = bundle.getStringArrayList("todos");
 
-        tasktime = Integer.valueOf(bundle.get("taskTime").toString()) * 60;
-        breaktime = Integer.valueOf(bundle.get("breakTime").toString()) * 60;
-        seconds = tasktime;
+        taskTime = Integer.valueOf(bundle.get("taskTime").toString()) * 60;
+        breakTime = Integer.valueOf(bundle.get("breakTime").toString()) * 60;
+        seconds = taskTime;
 
-        pomoTodos = new ArrayList<>();
-
-        //sanity check that the todos are getting to here
-        for (int i = 0; i < todos.size(); i++) {
-            pomoTodos.add(todos.get(i));
-            pomoTodos.add("take a break. browse reddit. you deserve it");
-        }
+        pomoTodos = setupPomodoroList(todos);
         pomoTodosSize = pomoTodos.size();
 
         if (savedInstanceState != null) {
@@ -60,19 +51,29 @@ public class PomodoroActivity extends AppCompatActivity {
             wasRunning = savedInstanceState.getBoolean("wasRunning");
         }
 
-        // if you leave the pomodoro activities, everything resets
-        // the reason is that if you delete the item in the pomodoro list
-        // it could be confusing to try and keep track of the correct state
-        Context context = getApplicationContext();
-        CharSequence text = "ONLY leave when you are done. All will reset when you leave!";
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.setGravity(Gravity.BOTTOM| Gravity.CENTER, 0 ,0);
-        toast.show();
-
-
         runTimer();
+    }
+
+    // insert each todos followed by the break message
+    private ArrayList<String> setupPomodoroList(ArrayList<String> todos) {
+        ArrayList<String> t = new ArrayList<>();
+        for (int i = 0; i < todos.size(); i++) {
+            t.add(todos.get(i));
+            t.add(getResources().getString(R.string.break_message));
+        }
+        return t;
+    }
+
+    private void clearActionBar() {
+        // the icon will put you back on main acvitity
+        // the back button at bottom of screen will give you a warning dialog too to teach users
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.mipmap.ic_launcher);
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setTitle("");
+        overridePendingTransition(R.animator.trans_left_in, R.animator.trans_left_out);
     }
 
     @Override
@@ -100,12 +101,6 @@ public class PomodoroActivity extends AppCompatActivity {
     public void setTaskText(int index) {
         TextView tv = (TextView) findViewById(R.id.current_pomo_item);
         if (pomoTodos.size() > 0) {
-            // trying to make a transition
-//            Context context = getApplicationContext();
-//            TextSwitcher ts = new TextSwitcher(context);
-//            ts.setInAnimation(context, android.R.anim.slide_in_left);
-//            ts.setOutAnimation(context, android.R.anim.slide_out_right);
-//            ts.addView(new TextView(context));
             tv.setText(pomoTodos.get(index));
         }
     }
@@ -124,7 +119,7 @@ public class PomodoroActivity extends AppCompatActivity {
     //Reset the stopwatch when the Reset button is clicked.
     public void onClickReset(View view) {
         running = false;
-        seconds = tasktime;
+        seconds = taskTime;
         currentPomoIndex = 0;
     }
 
@@ -132,32 +127,33 @@ public class PomodoroActivity extends AppCompatActivity {
     //Sets the number of seconds on the timer.
     private void runTimer() {
         final TextView timeView = (TextView)findViewById(R.id.time_view);
-        final Handler handler = new Handler();
-        handler.post(new Runnable() {
+        handler = new Handler();
+        runnable = new Runnable() {
             @Override
             public void run() {
-            int minutes = (seconds%3600)/60;
-            int secs = seconds%60;
-            String time = String.format("%02d:%02d", minutes, secs);
-            timeView.setText(time);
-            if (running) {
-                seconds--;
-                if (seconds == 0) {
-                    // alternate now
-                    if (currentPomoIndex % 2 == 1) {
-                        seconds = breaktime;
-                    } else {
-                        seconds = tasktime;
+                int minutes = (seconds%3600)/60;
+                int secs = seconds%60;
+                String time = String.format("%02d:%02d", minutes, secs);
+                timeView.setText(time);
+                if (running) {
+                    seconds--;
+                    if (seconds == 0) {
+                        // alternate now
+                        if (currentPomoIndex % 2 == 1) {
+                            seconds = breakTime;
+                        } else {
+                            seconds = taskTime;
+                        }
+                        // change text now
+                        currentPomoIndex = (currentPomoIndex + 1) % pomoTodosSize;
+                        setTaskText(currentPomoIndex);
                     }
-                    // change text now
-                    currentPomoIndex = (currentPomoIndex + 1) % pomoTodosSize;
-                    setTaskText(currentPomoIndex);
-
                 }
+                handler.postDelayed(this, 1000);
             }
-            handler.postDelayed(this, 1000);
-            }
-        });
+        };
+
+        handler.post(runnable);
     }
 
     @Override
@@ -173,7 +169,21 @@ public class PomodoroActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.animator.trans_right_in, R.animator.trans_right_out);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.warning)
+                .setCancelable(false)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        handler.removeCallbacks(runnable);
+                        PomodoroActivity.this.finish();
+                    }
+                })
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

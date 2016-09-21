@@ -19,16 +19,17 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements TodoListFragment.TodoListListener {
     TimerSettings ts =  TimerSettings.getInstance();
-    private boolean populateTodos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setActionBar();
+
         Todo.myList = new ArrayList<>();
-        ArrayList<Todo> test = (ArrayList<Todo>) Todo.listAll(Todo.class);
-        for (int i = test.size() - 1; i >= 0; --i) {
-            Todo.myList.add((Todo) test.get(i));
+        ArrayList<Todo> todos = (ArrayList<Todo>) Todo.listAll(Todo.class);
+        for (int i = todos.size() - 1; i >= 0; --i) {
+            Todo.myList.add((Todo) todos.get(i));
         }
 
         TimerSettings.getInstance();
@@ -58,6 +59,15 @@ public class MainActivity extends AppCompatActivity implements TodoListFragment.
         todolist.onResume();
     }
 
+    public void setActionBar() {
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.mipmap.ic_launcher);
+        actionBar.setDisplayShowHomeEnabled(true);
+        overridePendingTransition(R.animator.trans_left_in, R.animator.trans_left_out);
+    }
+
     public TimerSettings getTS() {
         return ts;
     }
@@ -77,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements TodoListFragment.
         intent.putExtra("taskTime", getTS().getTaskTimeMinute());
         intent.putExtra("breakTime", getTS().getBreakTimeMinute());
         startActivity(intent);
+        //finish(); // when this is there, the back button on other activities will go to phone home since this is ended.
     }
 
     public void onClickSetTimerSettings(View view) {

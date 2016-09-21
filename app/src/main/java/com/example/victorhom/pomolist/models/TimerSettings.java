@@ -1,8 +1,11 @@
 package com.example.victorhom.pomolist.models;
 
+import com.orm.dsl.Table;
+
 /**
  * Created by victorhom on 9/15/16.
  */
+@Table
 public class TimerSettings {
     private static int taskTimeMinute = 25;
     private static int breakTimeMinute = 5;
@@ -11,7 +14,8 @@ public class TimerSettings {
 
     private static TimerSettings ts = new TimerSettings();
 
-    private TimerSettings() {};
+
+    public TimerSettings() {};
 
     public static TimerSettings getInstance() {
         return ts;
