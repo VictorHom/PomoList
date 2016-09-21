@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -40,6 +41,8 @@ public class TimerSettingsFragment extends DialogFragment {
         // Inflate the layout for this fragment
 
 
+
+
         return inflater.inflate(R.layout.fragment_timer_settings, container, false);
     }
 
@@ -47,6 +50,8 @@ public class TimerSettingsFragment extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // hide the top header bar in this fragment
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
         taskTimePicker = (Spinner) view.findViewById(R.id.task_time);
         breakTimePicker = (Spinner) view.findViewById(R.id.break_time);
@@ -82,6 +87,7 @@ public class TimerSettingsFragment extends DialogFragment {
             taskTimes[i] = i + 1;
         }
         ArrayAdapter<Integer> adapterT = new ArrayAdapter<Integer>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item, taskTimes);
+        adapterT.setDropDownViewResource(R.layout.spinner_text);
         taskTimePicker.setAdapter(adapterT);
 
         // set the dropdown for selecting the break time
@@ -90,6 +96,7 @@ public class TimerSettingsFragment extends DialogFragment {
             breakTimes[i] = i + 1;
         }
         ArrayAdapter<Integer> adapterB = new ArrayAdapter<Integer>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item, breakTimes);
+        adapterB.setDropDownViewResource(R.layout.spinner_text);
         breakTimePicker.setAdapter(adapterB);
 
         MainActivity ma = (MainActivity) getActivity();

@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -87,8 +88,11 @@ public class EditTodoFragment extends DialogFragment {
         todoEditText.setText(todo);
         noteEditText.setText(note);
         inPomodoroList.setChecked(pomo);
-        dueDate.updateDate(year, month, day);
-        dueDate.refreshDrawableState();
+        if (dueDate != null) {
+            dueDate.updateDate(year, month, day);
+            dueDate.refreshDrawableState();
+        }
+
 
         int priorityLevel = Integer.valueOf(this.getArguments().getString("priority"));
         priorityPicker = (Spinner) view.findViewById(R.id.priority_picker);
@@ -97,12 +101,16 @@ public class EditTodoFragment extends DialogFragment {
             priorityLevels[i] = i + 1;
         }
         ArrayAdapter<Integer> adapterB = new ArrayAdapter<Integer>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item, priorityLevels);
-        priorityPicker.setBackgroundColor(Color.parseColor("#212121"));
-        priorityPicker.setAdapter(adapterB);
-        priorityPicker.setSelection(priorityLevel - 1);
+        if (priorityPicker != null) {
+            priorityPicker.setBackgroundColor(Color.parseColor("#212121"));
+            priorityPicker.setAdapter(adapterB);
+            priorityPicker.setSelection(priorityLevel - 1);
+        }
+
 
         // Show soft keyboard automatically and request focus to field
         todoEditText.requestFocus();
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setSoftInputMode(
             WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
@@ -121,10 +129,16 @@ public class EditTodoFragment extends DialogFragment {
                 updateTodo.setTodo(updatedTodo);
                 updateTodo.setNote(updatedNote);
                 updateTodo.setPomo(inPomodoroList.isChecked());
-                updateTodo.setDay(dueDate.getDayOfMonth());
-                updateTodo.setMonth(dueDate.getMonth());
-                updateTodo.setYear(dueDate.getYear());
-                updateTodo.setPriorityLevel(Integer.valueOf(priorityPicker.getSelectedItem().toString()));
+
+                if (dueDate != null) {
+                    updateTodo.setDay(dueDate.getDayOfMonth());
+                    updateTodo.setMonth(dueDate.getMonth());
+                    updateTodo.setYear(dueDate.getYear());
+                }
+
+                if (priorityPicker != null) {
+                    updateTodo.setPriorityLevel(Integer.valueOf(priorityPicker.getSelectedItem().toString()));
+                }
                 updateTodo.save();
                 todolist.onResume();
             }

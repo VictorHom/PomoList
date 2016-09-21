@@ -21,7 +21,9 @@
         android:layout_toRightOf="@+id/start_button"
         android:layout_toLeftOf="@+id/reset_button"
         android:layout_toStartOf="@+id/reset_button"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:paddingRight="90dp"/>
 
     <Button
         android:layout_width="wrap_content"
