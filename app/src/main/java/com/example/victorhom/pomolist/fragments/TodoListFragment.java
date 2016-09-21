@@ -23,15 +23,14 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class TodoListFragment extends ListFragment {
+
     private TodoListAdapter adapter;
-    private String[] todos;
-    private int[] todosColor;
     private LayoutInflater inflater;
+    private TodoListListener listener;
 
     public static interface TodoListListener {
         void itemClicked(long id);
     }
-    private TodoListListener listener;
 
     public TodoListFragment() {
         // Required empty public constructor
@@ -88,16 +87,17 @@ public class TodoListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedState) {
         super.onActivityCreated(savedState);
         final TodoListFragment tlf = this;
-
-        getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        AdapterView.OnItemLongClickListener avl = new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-            Todo.myList.get(position).delete();
-            Todo.myList.remove(position);
-            tlf.onResume();
-            return true;
+                Todo.myList.get(position).delete();
+                Todo.myList.remove(position);
+                tlf.onResume();
+                return true;
             }
-        });
+        };
+
+        getListView().setOnItemLongClickListener(avl);
     }
 
 }
