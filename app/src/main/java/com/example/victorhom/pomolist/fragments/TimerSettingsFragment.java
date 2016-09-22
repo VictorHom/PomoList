@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,8 @@ import com.example.victorhom.pomolist.models.TimerSettings;
 public class TimerSettingsFragment extends DialogFragment {
     private Spinner taskTimePicker;
     private Spinner breakTimePicker;
+    private Button saveButton;
+    private Button exitButton;
 
     public TimerSettingsFragment() {
         // Required empty public constructor
@@ -39,10 +42,6 @@ public class TimerSettingsFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-
-
-
         return inflater.inflate(R.layout.fragment_timer_settings, container, false);
     }
 
@@ -52,12 +51,19 @@ public class TimerSettingsFragment extends DialogFragment {
 
         // hide the top header bar in this fragment
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-
-        taskTimePicker = (Spinner) view.findViewById(R.id.task_time);
         breakTimePicker = (Spinner) view.findViewById(R.id.break_time);
+        taskTimePicker = (Spinner) view.findViewById(R.id.task_time);
+        saveButton = (Button) getView().findViewById(R.id.save);
+        exitButton = (Button) getView().findViewById(R.id.exit);
+        setSpinner(view, (MainActivity) getActivity());
+        setSaveButton();
+        setExitButton();
+        taskTimePicker.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorAccent));
+        breakTimePicker.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorAccent));
+    }
 
-        Button saveButton = (Button) getView().findViewById(R.id.save);
-        saveButton.setOnClickListener(new View.OnClickListener()
+    private void setSaveButton() {
+        View.OnClickListener listener = new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -69,27 +75,28 @@ public class TimerSettingsFragment extends DialogFragment {
                 me.getTS().setBreakTimeMinute(breakTime);
                 getDialog().dismiss();
             }
-        });
+        };
+        saveButton.setOnClickListener(listener);
+    }
 
-        Button exitButton = (Button) getView().findViewById(R.id.exit);
-        exitButton.setOnClickListener(new View.OnClickListener()
+    private void setExitButton() {
+        View.OnClickListener listener = new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 getDialog().dismiss();
             }
-        });
+        };
+        exitButton.setOnClickListener(listener);
+    }
 
-        // set the dropdown for selecting the task time
-        Integer[] taskTimes = new Integer[25];
-        for (int i = 0; i < taskTimes.length; i++) {
-            taskTimes[i] = i + 1;
-        }
-        ArrayAdapter<Integer> adapterT = new ArrayAdapter<Integer>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item, taskTimes);
-        adapterT.setDropDownViewResource(R.layout.spinner_text);
-        taskTimePicker.setAdapter(adapterT);
+    private void setSpinner(View view, MainActivity ma) {
+        setBreakTimeSpinner(view, ma);
+        setTaskTimeSpinner(view, ma);
+    }
 
+    private void setBreakTimeSpinner(View view, MainActivity ma) {
         // set the dropdown for selecting the break time
         Integer[] breakTimes = new Integer[10];
         for (int i = 0; i < breakTimes.length; i++) {
@@ -98,11 +105,18 @@ public class TimerSettingsFragment extends DialogFragment {
         ArrayAdapter<Integer> adapterB = new ArrayAdapter<Integer>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item, breakTimes);
         adapterB.setDropDownViewResource(R.layout.spinner_text);
         breakTimePicker.setAdapter(adapterB);
-
-        MainActivity ma = (MainActivity) getActivity();
-        taskTimePicker.setSelection(ma.getTS().getTaskTimeMinute() - 1);
         breakTimePicker.setSelection(ma.getTS().getBreakTimeMinute() - 1);
-
     }
 
+    private void setTaskTimeSpinner(View view, MainActivity ma) {
+        // set the dropdown for selecting the task time
+        Integer[] taskTimes = new Integer[25];
+        for (int i = 0; i < taskTimes.length; i++) {
+            taskTimes[i] = i + 1;
+        }
+        ArrayAdapter<Integer> adapterT = new ArrayAdapter<Integer>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item, taskTimes);
+        adapterT.setDropDownViewResource(R.layout.spinner_text);
+        taskTimePicker.setAdapter(adapterT);
+        taskTimePicker.setSelection(ma.getTS().getTaskTimeMinute() - 1);
+    }
 }
