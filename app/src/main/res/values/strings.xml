@@ -21,5 +21,10 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="break_message">take a break. browse reddit. you deserve it</string>
+    <string name="pomodoro_instructions">Choose times. The task time is how long you will do the activity.
+        The break time is how long you will rest for before starting the next activity. The recommended time
+        for task time is 25 minutes with a 5 minute break. Have fun!
+
+    </string>
 </resources>
 

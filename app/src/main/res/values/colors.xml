@@ -3,4 +3,7 @@
     <color name="tomato">#EA3712</color>
     <color name="colorPrimaryDark">#424242</color>
     <color name="colorAccent">#212121</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="green">#76FF03</color>
+    <color name="background_color">#ECEFF1</color>
 </resources>
