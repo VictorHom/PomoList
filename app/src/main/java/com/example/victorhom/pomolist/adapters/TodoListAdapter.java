@@ -1,7 +1,8 @@
 package com.example.victorhom.pomolist.adapters;
 
+import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,21 +33,33 @@ public class TodoListAdapter extends ArrayAdapter<Todo> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v= super.getView(position, convertView, parent);
-        TextView text = (TextView) v.findViewById (android.R.id.text1);
-        text.setText(todos.get(position).getTodo());
-
-        // priority level will adjust the text color
-        if (todos.get(position).getPriorityLevel() == 1) {
-            v.setBackgroundColor(Color.parseColor("#EA3712"));
-            v.getBackground().setAlpha(51);
+        View v = convertView;
+        if (v == null) {
+            LayoutInflater inflater = ((Activity)getContext()).getLayoutInflater();
+            v = inflater.inflate(R.layout.todo_row, null);
         }
+        TextView todoText = (TextView) v.findViewById(R.id.todo_text);
+        TextView date = (TextView) v.findViewById(R.id.due_date);
+        TextView tomato =  (TextView) v.findViewById(R.id.tomato);
+        TextView priorityText = (TextView) v.findViewById(R.id.priority);
+        Todo todo = (Todo) todos.get(position);
 
-        if (todos.get(position).getPomo()) {
-            text.setCompoundDrawablesWithIntrinsicBounds(
-                    0, 0, R.drawable.pomolist_launcher, 0);
+
+        if (todo != null && v != null) {
+            todoText.setText(todo.getTodo().toString());
+            date.setText(todos.get(position).getMonth()+ "/" + todos.get(position).getDay()+ "/" + todos.get(position).getYear());
+            if (todos.get(position).getPomo()) {
+                tomato.setCompoundDrawablesWithIntrinsicBounds(
+                        0, 0, R.drawable.todo_pomo_icon, 0);
+            }
+            if (todo.getPriorityLevel() == 1) {
+                priorityText.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.tomato));
+            } else if (todo.getPriorityLevel() == 2) {
+                priorityText.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.yellow));
+            } else {
+                priorityText.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.green));
+            }
         }
-
 
         return v;
     }
