@@ -4,18 +4,23 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
-
+import android.widget.Spinner;
 
 import com.example.victorhom.pomolist.R;
-import com.example.victorhom.pomolist.models.TimerSettings;
 import com.example.victorhom.pomolist.fragments.TimerSettingsFragment;
-import com.example.victorhom.pomolist.models.Todo;
 import com.example.victorhom.pomolist.fragments.TodoListFragment;
+import com.example.victorhom.pomolist.models.TimerSettings;
+import com.example.victorhom.pomolist.models.Todo;
+import com.example.victorhom.pomolist.utils.Comparators;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity implements TodoListFragment.TodoListListener {
     TimerSettings ts =  TimerSettings.getInstance();
@@ -34,6 +39,12 @@ public class MainActivity extends AppCompatActivity implements TodoListFragment.
 
         TimerSettings.getInstance();
         setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        setOrderSelection();
     }
 
     @Override
@@ -58,6 +69,42 @@ public class MainActivity extends AppCompatActivity implements TodoListFragment.
         TodoListFragment todolist = (TodoListFragment) getFragmentManager().findFragmentById(R.id.todolist);
         todolist.onResume();
     }
+
+    public void setOrderSelection() {
+        final Spinner orderSelection = (Spinner) findViewById(R.id.orderselect);
+        String[] orderTypes = new String[]{"Added Asc","Added Desc", "Priority", "Due Date"};
+        ArrayAdapter<String> adapterO = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, orderTypes);
+        adapterO.setDropDownViewResource(R.layout.spinner_text);
+        orderSelection.setAdapter(adapterO);
+        orderSelection.setSelection(0);
+        orderSelection.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.background_color));
+        final Comparators c = Comparators.getInstance();
+        orderSelection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                String selected = orderSelection.getSelectedItem().toString();
+                if (selected.equals("Added Asc")) {
+                    Collections.sort(Todo.myList, c.getCompByID());
+                } else if (selected.equals("Added Desc")) {
+                    Collections.sort(Todo.myList, c.getCompByIDReverse());
+                } else if (selected.equals("Priority")) {
+                    Collections.sort(Todo.myList, c.getCompByPriority());
+                } else {
+                    Collections.sort(Todo.myList, c.getCompByDate());
+                }
+                TodoListFragment todolist = (TodoListFragment) getFragmentManager().findFragmentById(R.id.todolist);
+                todolist.onResume();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+    }
+
+
 
     public void setActionBar() {
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
