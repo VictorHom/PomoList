@@ -37,13 +37,14 @@ The following **additional** features are implemented:
 
 * [X] List anything else that you can get done to improve the app functionality!
 
-Adding todo items to a timer. You can also set the timers (1 - 25 minutes) for the task time and the rest time (1-10 minutes) in the settings.
+* [X] Adding todo items to a timer. You can also set the timers (1 - 25 minutes) for the task time and the rest time (1-10 minutes) in the settings.
+* [X] A sorter to sort the todo items in different ways.
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/o3WfG6n.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/3B3mQlM.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
