@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements TodoListFragment.
 
     public void setOrderSelection() {
         final Spinner orderSelection = (Spinner) findViewById(R.id.orderselect);
-        String[] orderTypes = new String[]{"Added Asc","Added Desc", "Priority", "Due Date"};
+        String[] orderTypes = new String[]{"Added Desc","Added Asc", "Priority", "Due Date"};
         ArrayAdapter<String> adapterO = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, orderTypes);
         adapterO.setDropDownViewResource(R.layout.spinner_text);
         orderSelection.setAdapter(adapterO);
@@ -86,10 +86,10 @@ public class MainActivity extends AppCompatActivity implements TodoListFragment.
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int arg2, long arg3) {
                 String selected = orderSelection.getSelectedItem().toString();
-                if (selected.equals("Added Asc")) {
-                    Collections.sort(Todo.myList, c.getCompByID());
-                } else if (selected.equals("Added Desc")) {
+                if (selected.equals("Added Desc")) {
                     Collections.sort(Todo.myList, c.getCompByIDReverse());
+                } else if (selected.equals("Added Asc")) {
+                    Collections.sort(Todo.myList, c.getCompByID());
                 } else if (selected.equals("Priority")) {
                     Collections.sort(Todo.myList, c.getCompByPriority());
                 } else {
