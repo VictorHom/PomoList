@@ -71,14 +71,20 @@ public class MainActivity extends AppCompatActivity implements TodoListFragment.
     }
 
     public void setOrderSelection() {
+        final String option1 = "Added Desc";
+        final String option2 = "Added Asc";
+        final String option3 = "Priority";
+        final String option4 = "Due Date";
         final Spinner orderSelection = (Spinner) findViewById(R.id.orderselect);
-        String[] orderTypes = new String[]{"Added Desc","Added Asc", "Priority", "Due Date"};
+        final Comparators c = Comparators.getInstance();
+
+        String[] orderTypes = new String[]{option1, option2, option3, option4};
         ArrayAdapter<String> adapterO = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, orderTypes);
         adapterO.setDropDownViewResource(R.layout.spinner_text);
         orderSelection.setAdapter(adapterO);
         orderSelection.setSelection(0);
         orderSelection.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.background_color));
-        final Comparators c = Comparators.getInstance();
+
         orderSelection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
 
@@ -86,11 +92,11 @@ public class MainActivity extends AppCompatActivity implements TodoListFragment.
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int arg2, long arg3) {
                 String selected = orderSelection.getSelectedItem().toString();
-                if (selected.equals("Added Desc")) {
+                if (selected.equals(option1)) {
                     Collections.sort(Todo.myList, c.getCompByIDReverse());
-                } else if (selected.equals("Added Asc")) {
+                } else if (selected.equals(option2)) {
                     Collections.sort(Todo.myList, c.getCompByID());
-                } else if (selected.equals("Priority")) {
+                } else if (selected.equals(option3)) {
                     Collections.sort(Todo.myList, c.getCompByPriority());
                 } else {
                     Collections.sort(Todo.myList, c.getCompByDate());
