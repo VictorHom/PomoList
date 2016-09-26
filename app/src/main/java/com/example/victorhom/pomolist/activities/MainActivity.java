@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements TodoListFragment.
         final String option3 = "Priority";
         final String option4 = "Due Date";
         final Spinner orderSelection = (Spinner) findViewById(R.id.orderselect);
-        final Comparators c = Comparators.getInstance();
 
         String[] orderTypes = new String[]{option1, option2, option3, option4};
         ArrayAdapter<String> adapterO = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, orderTypes);
@@ -93,13 +92,13 @@ public class MainActivity extends AppCompatActivity implements TodoListFragment.
                                        int arg2, long arg3) {
                 String selected = orderSelection.getSelectedItem().toString();
                 if (selected.equals(option1)) {
-                    Collections.sort(Todo.myList, c.getCompByIDReverse());
+                    Collections.sort(Todo.myList, Comparators.getCompByIDReverse());
                 } else if (selected.equals(option2)) {
-                    Collections.sort(Todo.myList, c.getCompByID());
+                    Collections.sort(Todo.myList, Comparators.getCompByID());
                 } else if (selected.equals(option3)) {
-                    Collections.sort(Todo.myList, c.getCompByPriority());
+                    Collections.sort(Todo.myList, Comparators.getCompByPriority());
                 } else {
-                    Collections.sort(Todo.myList, c.getCompByDate());
+                    Collections.sort(Todo.myList, Comparators.getCompByDate());
                 }
                 TodoListFragment todolist = (TodoListFragment) getFragmentManager().findFragmentById(R.id.todolist);
                 todolist.onResume();
